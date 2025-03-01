@@ -1,0 +1,27 @@
+<!-- sections/templates/sections/section_detail.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ section.title }}</title>
+</head>
+<body>
+    <h1>{{ section.title }}</h1>
+    <p>{{ section.description }}</p>
+
+    <h2>Sub-sections</h2>
+    <ul>
+        {% for sub in subsections %}
+        <li>
+            <h3>{{ sub.title }}</h3>
+            <p>{{ sub.content }}</p>
+        </li>
+        {% empty %}
+        <li>No sub-sections available.</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'home' %}">Back to Home</a>
+</body>
+</html>

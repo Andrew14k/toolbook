@@ -1,0 +1,56 @@
+<!-- sections/templates/sections/home.html -->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programming Guide</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="title">Programming Guide</h1>
+        </header>
+
+        <!-- Sections List -->
+        <section class="sections-list">
+            {% for section in sections %}
+            <div class="section-item" data-id="{{ section.id }}">
+                <h2>{{ section.title }}</h2>
+                <p>{{ section.description }}</p>
+
+                <!-- Subsections (Hidden Initially) -->
+                <div class="subsections" style="display:none;">
+                    {% for sub in section.subsections.all %}
+                    <div class="subsection">
+                        <h3>{{ sub.title }}</h3>
+                        <p>{{ sub.content }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </section>
+    </div>
+
+    <script>
+        // JavaScript to toggle subsections when a section is clicked
+        const sections = document.querySelectorAll('.section-item');
+
+        sections.forEach(section => {
+            section.addEventListener('click', function() {
+                // Find the subsections and toggle visibility
+                const subsections = section.querySelector('.subsections');
+                if (subsections.style.display === 'none') {
+                    subsections.style.display = 'block';  // Show subsections
+                } else {
+                    subsections.style.display = 'none';  // Hide subsections
+                }
+            });
+        });
+    </script>
+</body>
+</html>
